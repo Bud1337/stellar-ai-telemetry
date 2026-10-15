@@ -3,27 +3,22 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { loadConfig } from "./config.js";
-import { parseSaveFile, findLatestSave } from "./parser/save-parser.js";
-import { parseGameLog } from "./parser/log-parser.js";
 import { LogWatcher } from "./watcher/log-watcher.js";
 import { SaveWatcher } from "./watcher/save-watcher.js";
-import { CommandWriter } from "./commands/command-writer.js";
 import {
   getGameState,
   getGameStateFromSave,
   formatGameState,
 } from "./tools/get-game-state.js";
-import type { GameState, Resources } from "./parser/types.js";
 import { RESOURCE_KEYS } from "./parser/types.js";
 
 const config = loadConfig();
 const logWatcher = new LogWatcher(config.gameLogPath);
 const saveWatcher = new SaveWatcher(config.saveGamesPath, config.saveProfile);
-const commandWriter = new CommandWriter(config.stellarisDocumentsPath);
 
 const server = new McpServer({
-  name: "stellaris-ai",
-  version: "0.1.0",
+  name: "stellaris-ai-readonly",
+  version: "0.1.0-readonly",
 });
 
 // ─── Tool: get_game_state ───────────────────────────────────────
@@ -276,52 +271,6 @@ server.tool(
   }
 );
 
-// ─── Tool: execute_command ──────────────────────────────────────
-server.tool(
-  "execute_command",
-  "Queue a console command for Stellaris. Commands are written to ai_commands.txt, which must be executed in-game via `run ai_commands.txt` in the console (~).",
-  {
-    command: z.string().describe("Console command to execute (e.g. 'cash 1000', 'research_technology tech_lasers_2')"),
-  },
-  async ({ command }) => {
-    commandWriter.queueCommand(command);
-    const result = await commandWriter.flush();
-    return { content: [{ type: "text" as const, text: result }] };
-  }
-);
-
-// ─── Tool: execute_effect ───────────────────────────────────────
-server.tool(
-  "execute_effect",
-  "Queue a PDXScript effect command. Wraps the effect in `effect { ... }` syntax. Written to ai_commands.txt for execution via console.",
-  {
-    effect: z.string().describe("PDXScript effect code (e.g. 'add_resource = { energy = 500 }')"),
-  },
-  async ({ effect }) => {
-    commandWriter.queueEffect(effect);
-    const result = await commandWriter.flush();
-    return { content: [{ type: "text" as const, text: result }] };
-  }
-);
-
-// ─── Tool: queue_commands ───────────────────────────────────────
-server.tool(
-  "queue_commands",
-  "Queue multiple console commands at once. They will all be written to ai_commands.txt.",
-  {
-    commands: z
-      .array(z.string())
-      .describe("Array of console commands to queue"),
-  },
-  async ({ commands }) => {
-    for (const cmd of commands) {
-      commandWriter.queueCommand(cmd);
-    }
-    const result = await commandWriter.flush();
-    return { content: [{ type: "text" as const, text: result }] };
-  }
-);
-
 // ─── Tool: list_save_profiles ───────────────────────────────────
 server.tool(
   "list_save_profiles",
@@ -399,8 +348,7 @@ server.tool(
       "5. **Technology Priorities** — What should be researched next given current situation?",
       "6. **Recommended Actions** — Top 3-5 concrete actions to take this decade.",
       "",
-      "If you want to execute actions, use the `execute_command` or `queue_commands` tools.",
-      `The player must then run \`run ai_commands.txt\` in the Stellaris console.`,
+      "This read-only server cannot issue commands or alter the game.",
     ];
 
     return { content: [{ type: "text" as const, text: analysis.join("\n") }] };

@@ -72,12 +72,13 @@ export function parseLogContent(content: string): LogGameState | null {
 
     switch (type) {
       case "AI_SUMMARY":
-        state.date = fields[0] || "";
+        state.date = clean(fields[0]);
         state.summary = {
           numPlanets: num(fields[2]),
           numPops: num(fields[3]),
-          navyCap: num(fields[4]),
-          fleetPower: num(fields[5]),
+          navyUsed: num(fields[4]),
+          navyCap: num(fields[5]),
+          fleetPower: num(fields[6]),
         };
         break;
 
@@ -123,7 +124,12 @@ export function parseLogContent(content: string): LogGameState | null {
         break;
 
       case "AI_TECH_OUTPUT":
-        // fields: physics|society|engineering
+        // fields: date|physics|society|engineering
+        state.techOutput = {
+          physics: num(fields[1]),
+          society: num(fields[2]),
+          engineering: num(fields[3]),
+        };
         break;
     }
   }
@@ -157,6 +163,11 @@ function extractAiLine(
 
 function num(val: string | undefined): number {
   if (!val) return 0;
-  const n = parseFloat(val);
+  const n = parseFloat(clean(val));
   return isNaN(n) ? 0 : n;
+}
+
+/** Accept legacy log lines that escaped Stellaris substitutions with a backslash. */
+function clean(val: string | undefined): string {
+  return (val || "").replace(/^\\+/, "");
 }

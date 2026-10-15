@@ -1,7 +1,7 @@
 {
-  "name": "stellaris-mcp",
+  "name": "stellaris-mcp-readonly",
   "version": "0.1.0",
-  "description": "MCP Server for AI interaction with Stellaris",
+  "description": "Read-only MCP server for inspecting Stellaris test data",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

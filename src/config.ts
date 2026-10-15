@@ -1,8 +1,7 @@
-import { homedir } from "os";
 import { join } from "path";
 
 export interface StellarisMcpConfig {
-  /** Path to Documents/Paradox Interactive/Stellaris/ */
+  /** Path to a read-only Stellaris data snapshot. */
   stellarisDocumentsPath: string;
   /** Path to Stellaris installation */
   stellarisInstallPath: string;
@@ -19,13 +18,14 @@ export interface StellarisMcpConfig {
 }
 
 export function loadConfig(): StellarisMcpConfig {
+  // Deliberately defaults to a local fixture instead of the user's game data.
   const documentsPath =
     process.env.STELLARIS_DOCUMENTS_PATH ||
-    join(homedir(), "Documents", "Paradox Interactive", "Stellaris");
+    join(process.cwd(), "test-fixture", "documents");
 
   const installPath =
     process.env.STELLARIS_INSTALL_PATH ||
-    "F:/SteamLibrary/steamapps/common/Stellaris";
+    "";
 
   const saveProfile = process.env.STELLARIS_SAVE_PROFILE || "";
 

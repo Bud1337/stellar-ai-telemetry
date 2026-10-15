@@ -177,7 +177,13 @@ export interface LogGameState {
   summary?: {
     numPlanets: number;
     numPops: number;
+    navyUsed: number;
     navyCap: number;
     fleetPower: number;
+  };
+  techOutput?: {
+    physics: number;
+    society: number;
+    engineering: number;
   };
 }
