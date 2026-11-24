@@ -3,4 +3,4 @@ tags={
 	"Utilities"
 }
 name="Stellar AI Telemetry"
-supported_version="v4.5.*"
+supported_version="v4.6.*"

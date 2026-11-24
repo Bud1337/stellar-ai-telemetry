@@ -3,4 +3,4 @@ tags={
 	"Utilities"
 }
 name="AI Player MCP Bridge"
-supported_version="4.3.*"
+supported_version="4.6.*"
