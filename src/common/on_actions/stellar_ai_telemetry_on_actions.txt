@@ -1,0 +1,7 @@
+# Read-only telemetry probe for Stellaris 4.5.2
+
+on_monthly_pulse_country = {
+	events = {
+		stellar_ai_telemetry.1
+	}
+}

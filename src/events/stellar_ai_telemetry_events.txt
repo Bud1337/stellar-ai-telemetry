@@ -1,0 +1,46 @@
+namespace = stellar_ai_telemetry
+
+# Runs only for the human country. It observes state and writes structured log lines.
+country_event = {
+	id = stellar_ai_telemetry.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = no
+	}
+
+	immediate = {
+		export_trigger_value_to_variable = {
+			trigger = num_owned_planets
+			variable = stellar_ai_telemetry_num_planets
+		}
+		export_trigger_value_to_variable = {
+			trigger = count_owned_pop_amount
+			parameters = {
+				count = all
+				limit = { }
+			}
+			variable = stellar_ai_telemetry_num_pops
+		}
+		export_trigger_value_to_variable = {
+			trigger = used_naval_capacity_integer
+			variable = stellar_ai_telemetry_navy_used
+		}
+		export_trigger_value_to_variable = {
+			trigger = max_naval_capacity
+			variable = stellar_ai_telemetry_navy_cap
+		}
+		export_trigger_value_to_variable = {
+			trigger = fleet_power
+			variable = stellar_ai_telemetry_fleet_power
+		}
+
+		log = "AI_SUMMARY|[GetDate]|[This.GetName]|[This.stellar_ai_telemetry_num_planets]|[This.stellar_ai_telemetry_num_pops]|[This.stellar_ai_telemetry_navy_used]|[This.stellar_ai_telemetry_navy_cap]|[This.stellar_ai_telemetry_fleet_power]"
+
+		stellar_ai_telemetry_dump_resources = yes
+		stellar_ai_telemetry_dump_tech = yes
+
+		log = "AI_STATE_END|[GetDate]"
+	}
+}

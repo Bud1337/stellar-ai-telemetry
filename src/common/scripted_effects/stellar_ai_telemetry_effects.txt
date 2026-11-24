@@ -1,0 +1,87 @@
+stellar_ai_telemetry_dump_resources = {
+	export_resource_stockpile_to_variable = {
+		resource = energy
+		variable = stellar_ai_telemetry_energy_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = energy
+		variable = stellar_ai_telemetry_energy_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|energy|\\[This.stellar_ai_telemetry_energy_stockpile]|\\[This.stellar_ai_telemetry_energy_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = minerals
+		variable = stellar_ai_telemetry_minerals_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = minerals
+		variable = stellar_ai_telemetry_minerals_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|minerals|\\[This.stellar_ai_telemetry_minerals_stockpile]|\\[This.stellar_ai_telemetry_minerals_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = food
+		variable = stellar_ai_telemetry_food_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = food
+		variable = stellar_ai_telemetry_food_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|food|\\[This.stellar_ai_telemetry_food_stockpile]|\\[This.stellar_ai_telemetry_food_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = consumer_goods
+		variable = stellar_ai_telemetry_consumer_goods_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = consumer_goods
+		variable = stellar_ai_telemetry_consumer_goods_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|consumer_goods|\\[This.stellar_ai_telemetry_consumer_goods_stockpile]|\\[This.stellar_ai_telemetry_consumer_goods_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = alloys
+		variable = stellar_ai_telemetry_alloys_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = alloys
+		variable = stellar_ai_telemetry_alloys_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|alloys|\\[This.stellar_ai_telemetry_alloys_stockpile]|\\[This.stellar_ai_telemetry_alloys_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = influence
+		variable = stellar_ai_telemetry_influence_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = influence
+		variable = stellar_ai_telemetry_influence_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|influence|\\[This.stellar_ai_telemetry_influence_stockpile]|\\[This.stellar_ai_telemetry_influence_income]"
+
+	export_resource_stockpile_to_variable = {
+		resource = unity
+		variable = stellar_ai_telemetry_unity_stockpile
+	}
+	export_resource_income_to_variable = {
+		resource = unity
+		variable = stellar_ai_telemetry_unity_income
+	}
+	log = "AI_RESOURCES|\\[GetDate]|unity|\\[This.stellar_ai_telemetry_unity_stockpile]|\\[This.stellar_ai_telemetry_unity_income]"
+}
+
+stellar_ai_telemetry_dump_tech = {
+	export_resource_income_to_variable = {
+		resource = physics_research
+		variable = stellar_ai_telemetry_physics_output
+	}
+	export_resource_income_to_variable = {
+		resource = society_research
+		variable = stellar_ai_telemetry_society_output
+	}
+	export_resource_income_to_variable = {
+		resource = engineering_research
+		variable = stellar_ai_telemetry_engineering_output
+	}
+	log = "AI_TECH_OUTPUT|\\[GetDate]|\\[This.stellar_ai_telemetry_physics_output]|\\[This.stellar_ai_telemetry_society_output]|\\[This.stellar_ai_telemetry_engineering_output]"
+}
