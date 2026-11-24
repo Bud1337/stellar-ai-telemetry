@@ -1,0 +1,7 @@
+node_modules/
+node_modules
+dist/
+test-fixture/
+*.js.map
+.idea/
+.claude/
